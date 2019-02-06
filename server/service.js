@@ -3,8 +3,25 @@
 const service = require("express")();
 
 const { tsdbApi } = require("../components/tsdbcomponent");
+const multer = require("multer");
 
 module.exports = function() {
+
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, './upload')
+        },
+        filename: function (req, file, cb) {
+          cb(null, file.originalname)
+        }
+      });
+      
+    service.use(multer({
+        storage: storage,
+        limits: {
+          fileSize: Infinity
+        }
+      }).any());
 
     service.use("/", tsdbApi);
 
