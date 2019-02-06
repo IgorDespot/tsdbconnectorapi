@@ -1,6 +1,6 @@
 "use strict"
 
-const tsdbApi = require("./tsdbcomponentapi")();
+const tsdbApi = require("./tsdbapi")();
 
 
 module.exports = {
